@@ -51,7 +51,7 @@ def test_model():
     print('res of test model: ', best_action, q_values)  # 0 [ 0.00896799 -0.02111824]
 
 
-class DQNAgent:
+class DDQNAgent:
     def __init__(self, model, env, buffer_size=150, learning_rate=.00001, epsilon=.1, epsilon_dacay=0.995, min_epsilon=.01,
                  gamma=.9, batch_size=4, target_update_iter=500, train_nums=10000, start_learning=100):
         self.model = model
