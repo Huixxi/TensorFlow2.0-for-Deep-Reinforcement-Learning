@@ -127,17 +127,17 @@ class DQNAgent:
 
         return losses
 
-    def evalation(self, render=True):
-        obs, done, ep_reward = self.env.reset(), False, 0
+    def evalation(self, env, render=True):
+        obs, done, ep_reward = env.reset(), False, 0
         # one episode until done
         while not done:
             action, q_values = self.model.action_value(obs[None])  # Using [None] to extend its dimension (4,) -> (1, 4)
-            obs, reward, done, info = self.env.step(action)
+            obs, reward, done, info = env.step(action)
             ep_reward += reward
             if render:  # visually show
-                self.env.render()
+                env.render()
             time.sleep(0.1)
-        self.env.close()
+        env.close()
         return ep_reward
 
     # store transitions into replay butter
