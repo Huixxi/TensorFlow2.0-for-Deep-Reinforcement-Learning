@@ -180,7 +180,7 @@ if __name__ == '__main__':
     env = gym.make("CartPole-v0")
     num_actions = env.action_space.n
     model = Model(num_actions)
-    agent = DQNAgent(model, env)
+    agent = DDQNAgent(model, env)
     # test before
     rewards_sum = agent.evalation()
     print("Before Training: %d out of 200" % rewards_sum) # 9 out of 200
