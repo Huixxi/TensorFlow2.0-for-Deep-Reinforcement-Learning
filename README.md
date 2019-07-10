@@ -21,7 +21,7 @@ Test:
 To be continue ...
 
 ### Python Tutorial
-Welcome to visit my [Fast Py3 Repo](https://github.com/Huixxi/Fast-Py3).
+* Welcome to visit my [Fast Py3 Repo](https://github.com/Huixxi/Fast-Py3). This is a fast python3 tutorial.
 
 ### Gym Tutorial
 To be continue ...
@@ -33,5 +33,5 @@ Book notes ...
 Demos ...
 
 ### Paper Reading
-Welcome to visit my personal blog website: [HU](https://www.cycygogo.cn/). There is a list of `RL Paper Overviews`. 
+* Welcome to visit my personal blog website: [HU's Blog](https://www.cycygogo.cn/). There is a list of **RL Paper Overviews**. 
 
