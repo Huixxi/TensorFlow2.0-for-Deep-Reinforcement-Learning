@@ -168,7 +168,7 @@ class PERAgent:  # Double DQN with Proportional Prioritization
             if t % self.target_update_iter == 0:
                 self.update_target_model()
             if done:
-                obs = env.reset()   # one episode end
+                obs = self.env.reset()   # one episode end
             else:
                 obs = next_obs
 
