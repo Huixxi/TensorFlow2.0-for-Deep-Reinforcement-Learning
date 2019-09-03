@@ -100,7 +100,7 @@ class DDQNAgent:
             if t % self.target_update_iter == 0:
                 self.update_target_model()
             if done:
-                obs = env.reset()
+                obs = self.env.reset()
             else:
                 obs = next_obs
 
