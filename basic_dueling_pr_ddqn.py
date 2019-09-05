@@ -109,7 +109,7 @@ class SumTree:
 
 
 class DDDQNAgent:  # Dueling Double DQN with Proportional Prioritization
-    def __init__(self, model, target_model, env, learning_rate=.0015, epsilon=.1, epsilon_dacay=0.995, min_epsilon=.01,
+    def __init__(self, model, target_model, env, learning_rate=.0005, epsilon=.1, epsilon_dacay=0.995, min_epsilon=.01,
                  gamma=.9, batch_size=8, target_update_iter=400, train_nums=5000, buffer_size=300, replay_period=20,
                  alpha=0.4, beta=0.4, beta_increment_per_sample=0.001):
         self.model = model
