@@ -199,7 +199,9 @@ class DDDQNAgent:  # Dueling Double DQN with Proportional Prioritization
         for i, val in enumerate(self.b_actions):
             predict_q[i][val] = td_target[i]
 
-        losses = self.model.train_on_batch(self.b_obs, predict_q)
+        target_q = predict_q  # just to change a more explicit name
+        losses = self.model.train_on_batch(self.b_obs, target_q)
+        
         return losses
 
     # proportional prioritization sampling
