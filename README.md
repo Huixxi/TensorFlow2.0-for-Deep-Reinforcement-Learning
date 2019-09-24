@@ -27,7 +27,7 @@ Book notes ...
 
 ### Deep Reinforcement Learning
 * Rainbow
-(Building Rainbow Step by Step with TensorFlow2.0)
+([Building Rainbow Step by Step with TensorFlow2.0](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/tutorial_blogs/Building_Rainbow_Step_by_Step_with_TensorFlow2.0.md))
   * [Deep Q-Network](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/01_dqn.py)
   * +[Double DQN](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/02_ddqn.py)
   * +[Prioritized Experience Replay](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/03_priority_replay.py) 
