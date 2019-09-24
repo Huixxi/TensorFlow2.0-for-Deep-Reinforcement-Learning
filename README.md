@@ -1,7 +1,6 @@
 ## TensorFlow 2.0 for Deep Reinforcement Learning
-![CartPole-v0 with Deep Reinforcement Learning](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/images/gym_cartpole_v0.gif)
 <img src="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/images/gym_cartpole_v0.gif" title="CartPole-v0 with Deep Reinforcement Learning" width="500" hegiht="313" align=center />
-Paper: 
+  
 This is a simple tutorial of deep reinforcement learning with tensorflow 2.0, which has simple demos and detailed model implementations to help beginners get through this research region.  
 
 ### How to install TensorFlow 2.0
