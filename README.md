@@ -16,9 +16,6 @@ Test:
 '2.0.0-beta1'
 ```
 
-### TensorFlow Tutorial
-To be continue ...
-
 ### Python Tutorial
 * Welcome to visit my [Fast Py3 Repo](https://github.com/Huixxi/Fast-Py3). This is a fast python3 tutorial.
 
@@ -29,7 +26,15 @@ To be continue ...
 Book notes ...
 
 ### Deep Reinforcement Learning
-Demos ...
+* Rainbow
+(Building Rainbow Step by Step with TensorFlow2.0)
+  * [Deep Q-Network](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/01_dqn.py)
+  * +[Double DQN](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/02_ddqn.py)
+  * +[Prioritized Experience Replay](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/03_priority_replay.py) 
+  * +[Dueling Network](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/04_dueling.py)
+  * +[Multi-Step Q-Learning](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/05_multistep_td.py)
+  * +[Distributional RL](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/06_distributional_rl.py)(Failed Yet, But I Will Try My BestTo Make It Work Soon!)
+  * +[Noisy Network](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/07_noisynet.py)(Failed Yet, But I Will Try My Best To Make It Work Soon!)
 
 ### Paper Reading
 * Welcome to visit my personal blog website: [HU's Blog](https://www.cycygogo.cn/). There is a list of **RL Paper Overviews**. 
