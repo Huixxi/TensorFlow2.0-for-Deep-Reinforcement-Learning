@@ -189,8 +189,9 @@ $$
 
 In multi-step Double DQN, the loss is :  
 $$
-R^{(n)}_t ≡ \sum\limits_{k=0}^{n-1} \gamma_t^{(k)}R_{t+k+1} 
+R^{(n)}_t = \sum\limits_{k=0}^{n-1} \gamma_t^{(k)}R_{t+k+1} 
 $$
+
 $$
 q_{target} = R^{(n)}_t + \gamma_{t}^n q_{\bar{\theta}}(S_{t+n}, \arg\max_{a'} q_{\theta}(S_{t+n}, a'))
 $$
