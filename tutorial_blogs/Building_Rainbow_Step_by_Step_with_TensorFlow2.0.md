@@ -107,7 +107,7 @@ self.loss = tf.reduce_mean(tf.squared_difference(q_samp, q))
 * Prioritizing with Temporal-Difference(TD) Error   
 TD-Error: how far the value is from its next-step bootstrap estimate $$ r + \lambda V(s') - V(s) $$    
 Where the value $r + \lambda V(s') $ is known as the TD target.    
-Experiences with high magnitude TD error also appear to be replayed more often. TD-errors have also been used as a prioritization mechanism for determining where to focus re- sources, for example when choosing where to explore or which features to select. However, the TD-error can be a poor estimate in some circumstances as well, e.g. when rewards are noisy.
+Experiences with high magnitude TD error also appear to be replayed more often. TD-errors have also been used as a prioritization mechanism for determining where to focus resources, for example when choosing where to explore or which features to select. However, the TD-error can be a poor estimate in some circumstances as well, e.g. when rewards are noisy.
 
 * Stochastic Prioritization  
 Because `greedy prioritization` results in high-error transitions are replayed too frequently causing lack of diversity which could lead to `over-fitting`. So `Stochastic Prioritization` is intruduced in order to add diversity and find a balance between greedy prioritization and random sampling.  
@@ -189,7 +189,9 @@ $$
 
 In multi-step Double DQN, the loss is :  
 $$
-R^{(n)}_t ≡ \sum\limits_{k=0}^{n-1} \gamma_t^{(k)}R_{t+k+1} \\
+R^{(n)}_t ≡ \sum\limits_{k=0}^{n-1} \gamma_t^{(k)}R_{t+k+1} 
+$$
+$$
 q_{target} = R^{(n)}_t + \gamma_{t}^n q_{\bar{\theta}}(S_{t+n}, \arg\max_{a'} q_{\theta}(S_{t+n}, a'))
 $$
 
@@ -203,9 +205,13 @@ $$
 ***Distributional Q-learning.*** Learn a categorical distribution of discounted returns, instead of its expectation.  
 In Q learning:  
 $$
-Q(s, a) = \sum\limits_{i=0}^{n} p_{r_i}r_i(s, a) + \gamma \sum\limits_{s' \in S} P(s'|s, a)\max_{a' \in A(s')}Q(s', a') \\
-= E_{s, a}[ r(s, a) ] + \gamma E_{s, a, s'}[ \max_{a' \in A(s')}Q(s', a') ]  \\
-= E_{s, a, s'}[ r(s, a)  + \gamma  \max_{a' \in A(s')}Q(s', a') ]
+Q(s, a) = \sum\limits_{i=0}^{n} p_{r_i}r_i(s, a) + \gamma \sum\limits_{s' \in S} P(s'|s, a)\max_{a' \in A(s')}Q(s', a') 
+$$
+$$
+Q(s, a) = E_{s, a}[ r(s, a) ] + \gamma E_{s, a, s'}[ \max_{a' \in A(s')}Q(s', a') ]  \\
+$$
+$$
+Q(s, a) = E_{s, a, s'}[ r(s, a)  + \gamma  \max_{a' \in A(s')}Q(s', a') ]
 $$
 Where $Q(s, a)$ is the expection of the discounted returns.  
 Now, in distributional rl, instead of calculating  the expection, we work directly with the full distribution of the returns of state $s$, action $a$ and following the current policy $\pi$, denoted by a random variable $Z(s, a)$.   
