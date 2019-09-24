@@ -267,7 +267,7 @@ I feel really sorry to say that actually, this is a failed implementation, just 
 
 ## 8>Noisy DQN  
 ***Noisy DQN.***  Use stochastic network layers for exploration.  
-By now, the exploration method we used are all e-greedy methods, but in some games such as Montezuma’s Revenge, where many actions must be executed to collect the first reward. the limitations of exploring using ?-greedy policies are clear. Noisy Nets propose a noisy linear layer that combines a deterministic and noisy stream.  
+By now, the exploration method we used are all e-greedy methods, but in some games such as Montezuma’s Revenge, where many actions must be executed to collect the first reward. the limitations of exploring using e-greedy policies are clear. Noisy Nets propose a noisy linear layer that combines a deterministic and noisy stream.  
 A normal linear layer with $p$ inputs and $q$ outputs, represented by:  
 $$
 y = wx + b
