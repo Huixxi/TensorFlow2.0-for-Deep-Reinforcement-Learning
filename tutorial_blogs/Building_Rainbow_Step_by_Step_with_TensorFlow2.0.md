@@ -47,24 +47,27 @@ with tf.variable_scope(scope, reuse=reuse) as _:
 	full_layer = layers.fully_connected(full_inputs, num_outputs=512, activation_fn=tf.nn.relu)
 	out = layers.fully_connected(full_layer, num_outputs=num_actions)
 ```
+
 [Do DQN from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/tf2_dqn_simple.py)
 
 
 
-<u>*3>  Nonlinear - DDQN*</u>
-***Double DQN.*** The main difference of *DDQN* from *DQN*  is the way of calculating the target q value.
-As a reminder, 
-In <u>Q-Learning:</u>
-$$Q(s,a) \leftarrow Q(s,a) + \alpha[r + \lambda max_{a'}Q(s',a') − Q(s,a)]$$
-$$Y_t^{Q} = R_{t+1} + \lambda max_{a'}Q(S_{t+1},a') = R_{t+1} + \lambda Q(S_{t+1},argmax_{a'}Q(S_{t+1},a'))$$
-In <u>DQN:</u>
-<img src="https://cdn-images-1.medium.com/max/800/1*Vd1kcpLoQDnM5vrKnvzxbw.png" title="Blog: https://cdn-images-1.medium.com/max/800/1*Vd1kcpLoQDnM5vrKnvzxbw.png" width="500" hegiht="313" align=center />
-where $\theta_{i-1}$ is the target network parameters which is  always represeted with $\theta_t^-$.
-$$Y_t^{DQN} = R_{t+1} + \lambda max_{a'}Q(S_{t+1},a';\theta_t^-)$$
-There is a problem with deep q-learning that "It is known to sometimes learn unrealistically high action values because it includes a maximization step over estimated action values, which tends to prefer overestimated to underestimated values" as said in [DDQN paper](https://arxiv.org/pdf/1509.06461.pdf).
-The idea of <u>Double Q-learning</u> is to reduce overestimations by decomposing the max operation in the target into action selection and action evaluation.
-$$Y_t^{DoubleQ} = R_{t+1} + \lambda Q(S_{t+1}, argmax_{a'}Q(S_{t+1},a';\theta_t);\theta_t^-)$$
-Implement with *tensorflow* (the minimal possible change to DQN in cs234 assignment 2)
+<u>*3>Nonlinear-DDQN*</u>  
+***Double DQN.*** The main difference of *DDQN* from *DQN* is the way of calculating the target q value.
+As a reminder,   
+In <u>Q-Learning:</u>  
+$$Q(s,a) \leftarrow Q(s,a) + \alpha[r + \lambda max_{a'}Q(s',a') − Q(s,a)]$$  
+$$Y_t^{Q} = R_{t+1} + \lambda max_{a'}Q(S_{t+1},a') = R_{t+1} + \lambda Q(S_{t+1},argmax_{a'}Q(S_{t+1},a'))$$  
+In <u>DQN:</u>  
+
+![Blog: https://cdn-images-1.medium.com/max/800/1*Vd1kcpLoQDnM5vrKnvzxbw.png](https://cdn-images-1.medium.com/max/800/1*Vd1kcpLoQDnM5vrKnvzxbw.png)
+
+where $\theta_{i-1}$ is the target network parameters which is always represeted with $\theta_t^-$.  
+$$Y_t^{DQN} = R_{t+1} + \lambda max_{a'}Q(S_{t+1},a';\theta_t^-)$$  
+There is a problem with deep q-learning that "It is known to sometimes learn unrealistically high action values because it includes a maximization step over estimated action values, which tends to prefer overestimated to underestimated values" as said in [DDQN paper](https://arxiv.org/pdf/1509.06461.pdf).  
+The idea of <u>Double Q-learning</u> is to reduce overestimations by decomposing the max operation in the target into action selection and action evaluation.  
+$$Y_t^{DoubleQ} = R_{t+1} + \lambda Q(S_{t+1}, argmax_{a'}Q(S_{t+1},a';\theta_t);\theta_t^-)$$  
+Implement with *tensorflow* (the minimal possible change to DQN in cs234 assignment 2)  
 ``` python
 # DQN
 q_samp = tf.where(self.done_mask, self.r, self.r + self.config.gamma * tf.reduce_max(target_q, axis=1))
@@ -80,18 +83,20 @@ actions = tf.one_hot(self.a, num_actions)
 q = tf.reduce_sum(tf.multiply(q, actions), axis=1)
 self.loss = tf.reduce_mean(tf.squared_difference(q_samp, q))
 ```
+
 [Do Double DQN from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/tf2_ddqn_simple.py)
 
 
 
 <u>*4>Prioritized experience replay*</u>
 ***Prioritized experience replay.*** Improve data efficiency, by replaying more often transitions from which there is more to learn.
-And the total algorithm is as follows:
-<img src="https://raw.githubusercontent.com/Huixxi/CS234-Reinforcement-Learning/master/rl_images/prior_replay.png" title="Paper: Prioritized Experience Replay." width="500" hegiht="313" align=center />
+And the total algorithm is as follows:  
 
-* Prioritizing with Temporal-Difference(TD) Error
-TD-Error: how far the value is from its next-step bootstrap estimate $$ r + \lambda V(s') - V(s) $$
-Where the value $r + \lambda V(s') $ is known as the TD target.
+<img src="https://raw.githubusercontent.com/Huixxi/CS234-Reinforcement-Learning/master/rl_images/prior_replay.png" title="Paper: Prioritized Experience Replay." width="500" hegiht="313" align=center />  
+
+* Prioritizing with Temporal-Difference(TD) Error  
+TD-Error: how far the value is from its next-step bootstrap estimate $$ r + \lambda V(s') - V(s) $$  
+Where the value $r + \lambda V(s') $ is known as the TD target.  
 Experiences with high magnitude TD error also appear to be replayed more often. TD-errors have also been used as a prioritization mechanism for determining where to focus re- sources, for example when choosing where to explore or which features to select. However, the TD-error can be a poor estimate in some circumstances as well, e.g. when rewards are noisy.
 
 * Stochastic Prioritization
