@@ -1,10 +1,9 @@
 ## TensorFlow 2.0 for Deep Reinforcement Learning
 <img src="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/images/gym_cartpole_v0.gif" title="CartPole-v0 with Deep Reinforcement Learning" width="500" hegiht="313" align=center />
   
-This is a simple tutorial of deep reinforcement learning with tensorflow 2.0, which has simple demos and detailed model implementations to help beginners get through this research region.  
+This is a simple tutorial of deep reinforcement learning with tensorflow 2.0, which has simple demos and detailed model implementations to help beginners get start in this research region.  
 
 ### How to install TensorFlow 2.0
-https://www.tensorflow.org/install/pip
 ```
 $ conda create --name tensorflow_2_0
 $ conda activate tensorflow_2_0
