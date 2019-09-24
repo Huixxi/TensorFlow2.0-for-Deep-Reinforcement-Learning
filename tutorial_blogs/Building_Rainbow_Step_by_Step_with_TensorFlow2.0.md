@@ -190,11 +190,11 @@ $$
 In multi-step Double DQN, the loss is :  
 $$
 R^{(n)}_t = \sum\limits_{k=0}^{n-1} \gamma_t^{(k)}R_{t+k+1} 
-$$
+$$  
 
 $$
 q_{target} = R^{(n)}_t + \gamma_{t}^n q_{\bar{\theta}}(S_{t+n}, \arg\max_{a'} q_{\theta}(S_{t+n}, a'))
-$$
+$$  
 
 (The algorithm looks easy to implement and stability guaranteed, but it brings much fluctuation and seems learning rate sensitive when used to train the agent to play CartPole-v0. So if you check this model, you maybe should pay a little bit more attention to it.)  
 
