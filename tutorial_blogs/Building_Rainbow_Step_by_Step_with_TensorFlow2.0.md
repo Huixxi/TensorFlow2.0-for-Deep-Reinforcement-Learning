@@ -100,7 +100,7 @@ self.loss = tf.reduce_mean(tf.squared_difference(q_samp, q))
 
 <u>*4>Prioritized experience replay*</u>  
 ***Prioritized experience replay.*** Improve data efficiency, by replaying more often transitions from which there is more to learn.  
-And the total algorithm is as follows:    
+***And the total algorithm is as follows:***    
 
 ![Paper: Prioritized Experience Replay](https://raw.githubusercontent.com/Huixxi/CS234-Reinforcement-Learning/master/rl_images/prior_replay.png)
 
@@ -116,9 +116,9 @@ $$
 P(i) = \frac{p_i^{\alpha}}{\sum_kp_k^{\alpha}}
 $$  
 (Note: the probability of sampling transition $P(i)$ has nothing to do with the probability to sample a transition(experience) in the replay buffer(sum tree), which is based on the transition's priority $p_i$. So don't be confused by it, the $P(i)$ is used to calculate the `Importance Sampling(IS) Weight`.)  
-where $p_i > 0$ is the priority of transition $i$. The exponent α determines how much prioritization is used, with $\alpha = 0$ corresponding to the uniform case.  
-> proportional prioritization: $p_i = |\delta_i| + \epsilon$   
-rank-based prioritization: $p_i = \frac{1}{rank(i)}$ , where $rank(i)$ is the rank of transition $i$ sorted according to $\delta_i$.  
+where $p_i > 0$ is the priority of transition $i$. The exponent α determines how much prioritization is used, with $\alpha = 0$ corresponding to the uniform case.
+  * proportional prioritization: $p_i = |\delta_i| + \epsilon$   
+  * rank-based prioritization: $p_i = \frac{1}{rank(i)}$ , where $rank(i)$ is the rank of transition $i$ sorted according to $\delta_i$.  
 
 * Importance Sampling(IS)  
 Because prioritized replay introduces a bias that changes this distribution uncontrollably. This can be corrected by using importance-sampling (IS) weights:  
@@ -143,7 +143,7 @@ Q(s, a; \theta, \alpha, \beta) = V(s; \theta, \beta) + \big(A(s, a; \theta, \alp
 $$
 where $\theta, \beta, \alpha$, respectively, the parameters of the shared convolutional encoder, value stream, and action advantage stream.  
 **The details of dueling network architecture for Atari:**  
-![](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/dueling_details.png)  
+![](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/dueling_detail.png)  
 
 Since both the value and the advantage stream propagate gradients to the last convolutional layer in the backward pass, we rescale the combined gradient entering the last convolutional layer by $1/\sqrt{2}$. This simple heuristic mildly increases stability. In addition, we clip the gradients to have their norm less than or equal to $10$.   
   
@@ -251,7 +251,7 @@ as the loss function.
 
 ***The total algorithm is as follows:***  
 
-![Paper:A Distributional Perspective on Reinforcement Learning](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/distributional_algorithm.png)
+![](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/distributional_algorithm2.png)
 
 [Do Distributional RL Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/basic_multistep_dddqn.py)
 I feel really sorry to say that actually, this is a failed implementation, just as a reference, but I still hope it to be helpful to someone, and I promise I will try my best to fix it. Further more, I really hope some good guy can check my code, find the wrong place, even as a contributor to make it work together, thanks a lot.
