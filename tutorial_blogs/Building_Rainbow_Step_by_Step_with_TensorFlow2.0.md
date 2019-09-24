@@ -50,7 +50,7 @@ with tf.variable_scope(scope, reuse=reuse) as _:
 	out = layers.fully_connected(full_layer, num_outputs=num_actions)
 ```
 
-[Do DQN from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/tf2_dqn_simple.py)
+[Do DQN from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/01_dqn.py)
 
 
 
@@ -94,7 +94,7 @@ q = tf.reduce_sum(tf.multiply(q, actions), axis=1)
 self.loss = tf.reduce_mean(tf.squared_difference(q_samp, q))
 ```
 
-[Do Double DQN from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/tf2_ddqn_simple.py)
+[Do Double DQN from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/02_ddqn.py)
 
 
 
@@ -128,7 +128,7 @@ $$
 that fully compensate for the non-uniform probabilities $P(i)$  if $\beta = 1$. These weights can be folded into the Q-learning update by using $w_i\delta_i$ instead of $\delta_i$. For stability reasons, we always normalize weights by $1 / max_i w_i$ so that they only scale the update downwards.  
 `IS` is annealed from $\beta_0$ to $1$, which means its affect is felt more strongly at the end of the stochastic process; this is because the unbiased nature of the updates in RL is most important near convergence.  
 
-[Do Double DQN with prioritized experience replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/tf2_priority_replay.py)
+[Do Double DQN with prioritized experience replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/03_priority_replay.py)
 
 
 ## 5>Dueling network architecture   
@@ -152,7 +152,7 @@ Since both the value and the advantage stream propagate gradients to the last co
 * ***Human Starts:*** Using 100 starting points sampled from a human expert’s trajectory.
 * ***Saliency maps:*** To better understand the roles of the value and the advantage streams.
 
-[Do Dueliing Double DQN with prioritized experience replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/basic_dueling_pr_ddqn.py)
+[Do Dueliing Double DQN with prioritized experience replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/04_dueling.py)
 
 
 
@@ -195,7 +195,7 @@ $$
 
 (The algorithm looks easy to implement and stability guaranteed, but it brings much fluctuation and seems learning rate sensitive when used to train the agent to play CartPole-v0. So if you check this model, you maybe should pay a little bit more attention to it.)  
 
-[Do Multi-Step Dueliing Double DQN with prioritized experience replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/basic_multistep_dddqn.py)
+[Do Multi-Step Dueliing Double DQN with prioritized experience replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/05_multistep_td.py)
 
 
 
@@ -253,7 +253,7 @@ as the loss function.
 
 ![](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/distributional_algorithm2.png)
 
-[Do Distributional RL Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/basic_multistep_dddqn.py)  
+[Do Distributional RL Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/06_distributional_rl.py)  
 I feel really sorry to say that actually, this is a failed implementation, just as a reference, but I still hope it to be helpful to someone, and I promise I will try my best to fix it. Further more, I really hope some good guy can check my code, find the wrong place, even as a contributor to make it work together, thanks a lot.
 
 
@@ -286,7 +286,7 @@ for the bias $\epsilon^b_j$ we could have set $f(x) = x$, but we decided to keep
 ***The total algorithm is as follows:***  
 ![Paper:Noisy Networks for Exploration](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/noisy_net_algorithm.png)
 
-[Do Noisy Network Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/basic_multistep_dddqn.py)  
+[Do Noisy Network Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/07_noisynet.py)  
 Sorry again, this model can't backpropagation maybe because some kind of flaw of TensorFlow2.0 or just my own mistake, I will try my best to make it work.
 
 
