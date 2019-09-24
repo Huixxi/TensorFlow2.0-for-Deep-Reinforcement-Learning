@@ -221,13 +221,13 @@ Now, in distributional rl, instead of calculating  the expection, we work direct
 
 Where $z_i - z_{i-1} = \Delta z = (V_{min} - V_{max}) / N$, we assume that the range of the return $z_i$ is from $V_{min}$ to $V_{max}$, $N$ is the number of atoms, $(z_i, p_i(s, a))$. Now, for each state-action pair $(s, a)$, there is a corresponding distribution of its returns, not a expection value. We calculate the action value of $(s, a)$ as $Q(s, a) = E[Z(s, a)]$. Even through we still use the expected value, what we're going to optimize is the distribution:  
 $$
-\sup_{s, a} dist(R(s, a) + \gamma Z_{\bar{\theta}}(s', a^*), Z_{\theta}(s, a)) \\
+\sup_{s, a} dist(R(s, a) + \gamma Z_{\bar{\theta}}(s', a^\*), Z_{\theta}(s, a)) \\
 a^* = \arg\max_{a′}Q(s′, a′) = \arg\max_{a′}E[Z(s′, a′)]
 $$
 The difference is obverse that, we still use a deep neural network to do function approximation, in traditional DQN, our output for each input state $s$ is a $|A|$-dim vector, each element corresponds to an action value $q(s, a)$, but now, the output for each input state $s$ is a $|A|N$-dim matrix, that each row is a $N$-dim vector represents the return distribution of $Z(s, a)$, then we calculate the action-value of $(s, a)$ through:   
 $$
 q(s, a) = E[Z(s, a)] = \sum\limits_{i=0}^{N} p_i(s, a) z_i
-$$
+$$  
 ***KL Divergence***  
 Now, we need to minimize the distance between the current distribution and the target distribution.   
 ***Note:*** the following content are mainly from that great blog: https://mtomassoli.github.io/2017/12/08/distributional_rl/#kl-divergence  
@@ -236,7 +236,7 @@ $$
 KL(p||q) = \int p(x) \log \frac{p(x)}{q(x)}dx \\
 KL(p||q) = \sum\limits_{i=1}^{N} p(x_i) \log\frac{p(x_i)}{q(x_i)} = \sum\limits_{i=1}^{N} p(x_i)[ \log{p(x_i)} - \log{q(x_i)}]
 $$
-"Now say we’re using DQN and extract $(s, a, r, s′)$ from the replay buffer. A “sample of the target distribution” is $r + \gamma Z_{\bar{\theta}}(s′, a^*)$. We want to move $Z_{\theta}(s, a)$ towards this target (by keeping the target fixed)."
+"Now say we’re using DQN and extract $(s, a, r, s′)$ from the replay buffer. A “sample of the target distribution” is $r + \gamma Z_{\bar{\theta}}(s′, a^\*)$. We want to move $Z_{\theta}(s, a)$ towards this target (by keeping the target fixed)."
 
 ![](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/distributional_learn.png)
 
@@ -306,7 +306,7 @@ Where $\Phi_z$ is the projection onto $z$, and the target distribution $d_t^{(n)
 $$
 d_t^{(n)} =(R_t^{(n)} + \gamma_t^{(n)} z, p_\bar{\theta} (S_{t+n}, a^{\*}\_{t+n}))
 $$  
-Using **double Q-learning** gets the greedy action $a^*_{t+n}$ of $S_{t+n}$ through *online network*, and evaluates such action using the *target network*.  
+Using **double Q-learning** gets the greedy action $a^\*\_{t+n}$ of $S_{t+n}$ through *online network*, and evaluates such action using the *target network*.  
 
 In Rainbow, it uses the KL loss to **prioritize transitions** instead of using the absolute TD error, maybe more robust to noisy stochastic environments because the loss can continue to decrease even when the returns are not deterministic.  
 $$
@@ -314,11 +314,9 @@ p_t  \propto (D_{KL}(\Phi_z d_t^{(n)} || d_t))^w
 $$  
 
 The network architecture is a **dueling network architecture** adapted for use with return **distributions**. The network has a shared representation $f_{\xi}(s)$, which is then fed into a value stream $v_{\eta}$ with $N_{atoms}$ outputs, and into an advantage stream $a_{\xi}$ with $N_{atoms} \times N_{actions}$ outputs, where $a_{\xi}^i(f_{\xi}(s),a)$ will denote the output corresponding to atom $i$ and action $a$. For each atom $z^i$, the value and advantage streams are aggregated, as in dueling DQN, and then passed through a softmax layer to obtain the normalised parametric distributions used to estimate the returns’ distributions:
-```
 $$
-p_{\theta}^i(s, a) = \frac{exp(v_{\eta}^i + a_{\Phi}^i(\phi, a) - \bar{a}_{\Phi}^i(s))}{\sum_j exp(v_{\eta}^j + a_{\Phi}^j(\phi, a) - \bar{a}_{\Phi}^j(s))}
+p_{\theta}^i(s, a) = \frac{exp(v_{\eta}^i + a_{\Phi}^i(\phi, a) - \bar{a}\_{\Phi}^i(s))}{\sum_j exp(v_{\eta}^j + a_{\Phi}^j(\phi, a) - \bar{a}\_{\Phi}^j(s))}
 $$  
-```
 where $\phi = f_{\xi}(s)$, and $\bar{a}\_{\Phi}^i(s) = \frac{1}{N_{actions}}\sum_{a'}a_{\Phi}^i(\phi, a')$  
 
 Then replace all linear layers with their noisy equivalent(factorised Gaussian noise version).   
