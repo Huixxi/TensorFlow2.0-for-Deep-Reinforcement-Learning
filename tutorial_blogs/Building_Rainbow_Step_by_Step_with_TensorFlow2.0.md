@@ -32,11 +32,11 @@ out = layers.fully_connected(inputs, num_actions, scope=scope, reuse=reuse)
 <u>*2>Nonlinear-DQN*</u>  
 ***Deep Q-Network.*** The main difference of *DQN* from *linear approximator* is the architecture of getting the *q_value*, it is nonlinear.
 
-![](https://media.nature.com/lw926/nature-assets/nature/journal/v518/n7540/images/nature14236-f1.jpg)
+![](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/dqn.png)
 
 And the total algorithm is as follows:  
 
-![Paper: Human-level control through deep reinforcement learning.](https://raw.githubusercontent.com/Huixxi/CS234-Reinforcement-Learning/master/rl_images/dqn_algorithm.png)
+![Paper: Human-level control through deep reinforcement learning.](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/dqn_algorithm.png)
 
 The approximator of DeepMind DQN implemented with *tensorflow* as described in their [Nature paper](https://www.nature.com/articles/nature14236) can be:
 ``` python
@@ -66,7 +66,7 @@ Y_t^{Q} = R_{t+1} + \lambda max_{a'}Q(S_{t+1},a') = R_{t+1} + \lambda Q(S_{t+1},
 $$  
 In <u>DQN:</u>  
 
-![Blog: https://cdn-images-1.medium.com/max/800/1*Vd1kcpLoQDnM5vrKnvzxbw.png](https://cdn-images-1.medium.com/max/800/1*Vd1kcpLoQDnM5vrKnvzxbw.png)
+![](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/ddqn.png)
 
 where $\theta_{i-1}$ is the target network parameters which is always represeted with $\theta_t^-$.  
 $$
