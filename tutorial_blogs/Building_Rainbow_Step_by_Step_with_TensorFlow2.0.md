@@ -294,22 +294,22 @@ Sorry again, this model can't backpropagation maybe because some kind of flaw of
 Finally, we get the integrated agent: Rainbow. It used a **multi-step** distributional loss:  
 $$
 D_{KL}(\Phi_z d_t^{(n)} || d_t)
-$$
+$$  
 Where $\Phi_z$ is the projection onto $z$, and the target distribution $d_t^{(n)}$ is:  
 $$
 d_t^{(n)} =(R_t^{(n)} + \gamma_t^{(n)} z, p_\bar{\theta} (S_{t+n}, a^*_{t+n}))
-$$
+$$  
 Using **double Q-learning** gets the greedy action $a^*_{t+n}$ of $S_{t+n}$ through *online network*, and evaluates such action using the *target network*.  
 
 In Rainbow, it uses the KL loss to **prioritize transitions** instead of using the absolute TD error, maybe more robust to noisy stochastic environments because the loss can continue to decrease even when the returns are not deterministic.  
 $$
 p_t  \propto (D_{KL}(\Phi_z d_t^{(n)} || d_t))^w
-$$
+$$  
 
-The network architecture is a **dueling network architecture** adapted for use with return **distributions**. The network has a shared representation $f_{\xi}(s)$, which is then fed into a value stream $v_{\eta}$ with $N_{atoms}$ outputs, and into an advantage stream $a_{\xi}$ with $N_{atoms} \times N_{actions}$ outputs, where $a_{\xi}^i(f_{\xi}(s),a)$ will denote the output corresponding to atom $i$ and action $a$. For each atom $z^i$, the value and advantage streams are aggregated, as in dueling DQN, and then passed through a softmax layer to obtain the normalised parametric distributions used to estimate the returns’ distributions:  
+The network architecture is a **dueling network architecture** adapted for use with return **distributions**. The network has a shared representation $f_{\xi}(s)$, which is then fed into a value stream $v_{\eta}$ with $N_{atoms}$ outputs, and into an advantage stream $a_{\xi}$ with $N_{atoms} \times N_{actions}$ outputs, where $a_{\xi}^i(f_{\xi}(s),a)$ will denote the output corresponding to atom $i$ and action $a$. For each atom $z^i$, the value and advantage streams are aggregated, as in dueling DQN, and then passed through a softmax layer to obtain the normalised parametric distributions used to estimate the returns’ distributions:   
 $$
 p_{\theta}^i(s, a) = \frac{exp(v_{\eta}^i + a_{\Phi}^i(\phi, a) - \bar{a}_{\Phi}^i(s))}{\sum_j exp(v_{\eta}^j + a_{\Phi}^j(\phi, a) - \bar{a}_{\Phi}^j(s))}
-$$
+$$  
 where $\phi = f_{\xi}(s)$, and $\bar{a}_{\Phi}^i(s) = \frac{1}{N_{actions}}\sum_{a'}a_{\Phi}^i(\phi, a')$  
 
 Then replace all linear layers with their noisy equivalent(factorised Gaussian noise version).   
@@ -345,13 +345,13 @@ Any suggestion is more than welcome, thanks again.
 
 
 **GitHub Repos:**  
-[inoryy/tensorflow2-deep-reinforcement-learning for the whole TF2 Network Architecture](https://github.com/inoryy/tensorflow2-deep-reinforcement-learning)  
-[keras-rl for Deuling Network](https://github.com/germain-hug/Deep-RL-Keras/blob/master/DDQN/agent.py#L49)  
-[jaromiru/AI-blog for Prioritized Experience Replay](https://github.com/jaromiru/AI-blog/blob/master/SumTree.py)  
-[rl_algorithms for Multi-Step TD Learning](https://github.com/medipixel/rl_algorithms/)  
-[Kaixhin/Rainbow for Distribution RL & Noisy Net](https://github.com/Kaixhin/Rainbow/blob/master/model.py#L10)  
-[keras for Noisy Net](https://github.com/keras-team/keras/blob/master/keras/layers/core.py#L796)  
-[dopamine for Rainbow](https://github.com/google/dopamine/blob/master/dopamine/agents/rainbow/rainbow_agent.py)
+[1.inoryy/tensorflow2-deep-reinforcement-learning for the whole TF2 Network Architecture](https://github.com/inoryy/tensorflow2-deep-reinforcement-learning)  
+[2.keras-rl for Deuling Network](https://github.com/germain-hug/Deep-RL-Keras/blob/master/DDQN/agent.py#L49)  
+[3.jaromiru/AI-blog for Prioritized Experience Replay](https://github.com/jaromiru/AI-blog/blob/master/SumTree.py)  
+[4.rl_algorithms for Multi-Step TD Learning](https://github.com/medipixel/rl_algorithms/)  
+[5.Kaixhin/Rainbow for Distribution RL & Noisy Net](https://github.com/Kaixhin/Rainbow/blob/master/model.py#L10)  
+[6.keras for Noisy Net](https://github.com/keras-team/keras/blob/master/keras/layers/core.py#L796)  
+[7.dopamine for Rainbow](https://github.com/google/dopamine/blob/master/dopamine/agents/rainbow/rainbow_agent.py)
 
 
 
