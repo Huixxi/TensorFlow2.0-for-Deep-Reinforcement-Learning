@@ -224,7 +224,7 @@ $$
 \sup_{s, a} dist(R(s, a) + \gamma Z_{\bar{\theta}}(s', a^*), Z_{\theta}(s, a)) \\
 a^* = \arg\max_{a′}Q(s′, a′) = \arg\max_{a′}E[Z(s′, a′)]
 $$
-The difference is obverse that, we still use a deep neural network to do function approximation, in traditional DQN, our output for each input state $s$ is a $|A|$-dim vector, each element corresponds to an action value $q(s, a)$, but now, the output for each input state $s$ is a $|A|*N$-dim matrix, that each row is a $N$-dim vector represents the return distribution of $Z(s, a)$, then we calculate the action-value of $(s, a)$ through:   
+The difference is obverse that, we still use a deep neural network to do function approximation, in traditional DQN, our output for each input state $s$ is a $|A|$-dim vector, each element corresponds to an action value $q(s, a)$, but now, the output for each input state $s$ is a $|A|N$-dim matrix, that each row is a $N$-dim vector represents the return distribution of $Z(s, a)$, then we calculate the action-value of $(s, a)$ through:   
 $$
 q(s, a) = E[Z(s, a)] = \sum\limits_{i=0}^{N} p_i(s, a) z_i
 $$
@@ -313,10 +313,12 @@ $$
 p_t  \propto (D_{KL}(\Phi_z d_t^{(n)} || d_t))^w
 $$  
 
-The network architecture is a **dueling network architecture** adapted for use with return **distributions**. The network has a shared representation $f_{\xi}(s)$, which is then fed into a value stream $v_{\eta}$ with $N_{atoms}$ outputs, and into an advantage stream $a_{\xi}$ with $N_{atoms} \times N_{actions}$ outputs, where $a_{\xi}^i(f_{\xi}(s),a)$ will denote the output corresponding to atom $i$ and action $a$. For each atom $z^i$, the value and advantage streams are aggregated, as in dueling DQN, and then passed through a softmax layer to obtain the normalised parametric distributions used to estimate the returns’ distributions:   
+The network architecture is a **dueling network architecture** adapted for use with return **distributions**. The network has a shared representation $f_{\xi}(s)$, which is then fed into a value stream $v_{\eta}$ with $N_{atoms}$ outputs, and into an advantage stream $a_{\xi}$ with $N_{atoms} \times N_{actions}$ outputs, where $a_{\xi}^i(f_{\xi}(s),a)$ will denote the output corresponding to atom $i$ and action $a$. For each atom $z^i$, the value and advantage streams are aggregated, as in dueling DQN, and then passed through a softmax layer to obtain the normalised parametric distributions used to estimate the returns’ distributions:
+```
 $$
 p_{\theta}^i(s, a) = \frac{exp(v_{\eta}^i + a_{\Phi}^i(\phi, a) - \bar{a}_{\Phi}^i(s))}{\sum_j exp(v_{\eta}^j + a_{\Phi}^j(\phi, a) - \bar{a}_{\Phi}^j(s))}
 $$  
+```
 where $\phi = f_{\xi}(s)$, and $\bar{a}_{\Phi}^i(s) = \frac{1}{N_{actions}}\sum_{a'}a_{\Phi}^i(\phi, a')$  
 
 Then replace all linear layers with their noisy equivalent(factorised Gaussian noise version).   
