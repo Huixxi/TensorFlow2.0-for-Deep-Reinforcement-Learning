@@ -317,37 +317,40 @@ Then replace all linear layers with their noisy equivalent(factorised Gaussian n
 Done, and thanks for reading, I hope it could be helpful to someone.   
 Any suggestion is more than welcome, thanks again.  
 
-<u>REFERENCES</u> 
-**Blogs:**
-[1.Self Learning AI-Agents III:Deep (Double) Q-Learning(Blog)](https://towardsdatascience.com/deep-double-q-learning-7fca410b193a)
-[2.【强化学习】Deep Q Network(DQN)算法详解(Bolg)](https://blog.csdn.net/qq_30615903/article/details/80744083)
-[3.Improvements in Deep Q Learning: Dueling Double DQN, Prioritized Experience Replay, and fixed…(Blog)](https://www.freecodecamp.org/news/improvements-in-deep-q-learning-dueling-double-dqn-prioritized-experience-replay-and-fixed-58b130cc5682/)
-[4.Let’s make a DQN: Double Learning and Prioritized Experience Replay(Blog)](https://jaromiru.com/2016/11/07/lets-make-a-dqn-double-learning-and-prioritized-experience-replay/)
-[5.Distributional RL](https://mtomassoli.github.io/2017/12/08/distributional_rl/#ref-2017arXiv171010044D)
 
-**Books:**
-[1.Reinforcement Learning: An Introduction (Chapter 6, 7, 9)](http://incompleteideas.net/book/the-book-2nd.html) 
-
-**Papers:**
-[1.Rainbow: Combining Improvements in Deep Reinforcement Learning](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewFile/17204/16680)
-[2.Human-level control through deep reinforcement learning](https://daiwk.github.io/assets/dqn.pdf)
-[3.Implementing the Deep Q-Network](https://arxiv.org/pdf/1711.07478.pdf)
-[4.Deep Reinforcement Learning with Double Q-learning](https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/12389/11847)
-[5.Prioritized Experience Replay](https://arxiv.org/pdf/1511.05952.pdf)
-[6.Dueling Network Architectures for Deep Reinforcement Learning](https://arxiv.org/pdf/1511.06581.pdf)
-[7.Understanding Multi-Step Deep Reinforcement Learning: A Systematic Study of the DQN Target](https://arxiv.org/pdf/1901.07510.pdf)
-[8.Distributed Prioritized Experience Replay](https://arxiv.org/pdf/1803.00933.pdf)
-[9.A Distributional Perspective on Reinforcement Learning](https://arxiv.org/pdf/1707.06887.pdf)
-[10.Noisy Networks for Exploration](https://arxiv.org/pdf/1706.10295.pdf)
+<u>REFERENCES</u>   
+**Blogs:**  
+[1.Self Learning AI-Agents III:Deep (Double) Q-Learning(Blog)](https://towardsdatascience.com/deep-double-q-learning-7fca410b193a)  
+[2.【强化学习】Deep Q Network(DQN)算法详解(Bolg)](https://blog.csdn.net/qq_30615903/article/details/80744083)  
+[3.Improvements in Deep Q Learning: Dueling Double DQN, Prioritized Experience Replay, and fixed…(Blog)](https://www.freecodecamp.org/news/improvements-in-deep-q-learning-dueling-double-dqn-prioritized-experience-replay-and-fixed-58b130cc5682/)  
+[4.Let’s make a DQN: Double Learning and Prioritized Experience Replay(Blog)](https://jaromiru.com/2016/11/07/lets-make-a-dqn-double-learning-and-prioritized-experience-replay/)  
+[5.Distributional RL](https://mtomassoli.github.io/2017/12/08/distributional_rl/#ref-2017arXiv171010044D)  
 
 
-**GitHub Repos:**
-[inoryy/tensorflow2-deep-reinforcement-learning for the whole TF2 Network Architecture](https://github.com/inoryy/tensorflow2-deep-reinforcement-learning)
-[keras-rl for Deuling Network](https://github.com/germain-hug/Deep-RL-Keras/blob/master/DDQN/agent.py#L49)
-[jaromiru/AI-blog for Prioritized Experience Replay](https://github.com/jaromiru/AI-blog/blob/master/SumTree.py)
-[rl_algorithms for Multi-Step TD Learning](https://github.com/medipixel/rl_algorithms/)
-[Kaixhin/Rainbow for Distribution RL & Noisy Net](https://github.com/Kaixhin/Rainbow/blob/master/model.py#L10)
-[keras for Noisy Net](https://github.com/keras-team/keras/blob/master/keras/layers/core.py#L796)
+**Books:**  
+[1.Reinforcement Learning: An Introduction (Chapter 6, 7, 9)](http://incompleteideas.net/book/the-book-2nd.html)   
+
+
+**Papers:**  
+[1.Rainbow: Combining Improvements in Deep Reinforcement Learning](https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewFile/17204/16680)  
+[2.Human-level control through deep reinforcement learning](https://daiwk.github.io/assets/dqn.pdf)  
+[3.Implementing the Deep Q-Network](https://arxiv.org/pdf/1711.07478.pdf)  
+[4.Deep Reinforcement Learning with Double Q-learning](https://www.aaai.org/ocs/index.php/AAAI/AAAI16/paper/view/12389/11847)  
+[5.Prioritized Experience Replay](https://arxiv.org/pdf/1511.05952.pdf)  
+[6.Dueling Network Architectures for Deep Reinforcement Learning](https://arxiv.org/pdf/1511.06581.pdf)  
+[7.Understanding Multi-Step Deep Reinforcement Learning: A Systematic Study of the DQN Target](https://arxiv.org/pdf/1901.07510.pdf)  
+[8.Distributed Prioritized Experience Replay](https://arxiv.org/pdf/1803.00933.pdf)  
+[9.A Distributional Perspective on Reinforcement Learning](https://arxiv.org/pdf/1707.06887.pdf)  
+[10.Noisy Networks for Exploration](https://arxiv.org/pdf/1706.10295.pdf)  
+
+
+**GitHub Repos:**  
+[inoryy/tensorflow2-deep-reinforcement-learning for the whole TF2 Network Architecture](https://github.com/inoryy/tensorflow2-deep-reinforcement-learning)  
+[keras-rl for Deuling Network](https://github.com/germain-hug/Deep-RL-Keras/blob/master/DDQN/agent.py#L49)  
+[jaromiru/AI-blog for Prioritized Experience Replay](https://github.com/jaromiru/AI-blog/blob/master/SumTree.py)  
+[rl_algorithms for Multi-Step TD Learning](https://github.com/medipixel/rl_algorithms/)  
+[Kaixhin/Rainbow for Distribution RL & Noisy Net](https://github.com/Kaixhin/Rainbow/blob/master/model.py#L10)  
+[keras for Noisy Net](https://github.com/keras-team/keras/blob/master/keras/layers/core.py#L796)  
 [dopamine for Rainbow](https://github.com/google/dopamine/blob/master/dopamine/agents/rainbow/rainbow_agent.py)
 
 
