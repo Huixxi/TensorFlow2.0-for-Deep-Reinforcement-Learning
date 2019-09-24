@@ -11,12 +11,14 @@ This paper examines six main extensions to DQN algorithm and empirically studies
 [Baseline: Deep Q-Network(DQN) Algorithm Implementation in CS234 Assignment 2](https://github.com/Huixxi/CS234-Reinforcement-Learning/tree/master/assignment%202)
 
 <u>1.INTRODUCTION</u>   
-Because the traditional tabular methods are not applicable in arbitrarily large state spaces, we turn to those approximate solution methods (`linear approximator & nonlinear approximator` `value-function approximation & policy approximation`), which is to find a good approximate solution using limited computational resources.  We can use a `linear function`, or `multi-layer artificial neural networks`, or  `decision tree` as a parameterized function to approximate the value-function or policy.(More, see Sutton's book [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book-2nd.html) Chapter 9).
-The following methods are all `value-function approximation` and `gradient-based(using the gradients to update the parameters)`, and they all use **experience replay** and **target network** to eliminate the correlations present in the sequence of observations.
-<u>*1>  Linear*</u>
-Using a linear function to approximate the value function(always the action value).
-$$\hat v(s, w) \doteq w^Tx(s) \doteq \sum \limits_{i=1}^d w_i x_i$$
-$w$ is the parameters, $x(s)$ is called a <u>*feature  vector*</u> representing state $s$, and the state $s$ is the images(frames) observed by the agent in most time. So a linear approximator implemented with *tensorflow* can be just a fully-connected layer.
+Because the traditional tabular methods are not applicable in arbitrarily large state spaces, we turn to those approximate solution methods (`linear approximator & nonlinear approximator` `value-function approximation & policy approximation`), which is to find a good approximate solution using limited computational resources.  We can use a `linear function`, or `multi-layer artificial neural networks`, or `decision tree` as a parameterized function to approximate the value-function or policy.(More, read Sutton's book [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book-2nd.html) Chapter 9).  
+
+The following methods are all `value-function approximation` and `gradient-based(using the gradients to update the parameters)`, and they all use **experience replay** and **target network** to eliminate the correlations present in the sequence of observations.  
+
+<u>*1>Linear*</u>  
+Using a linear function to approximate the value function(always the action value).  
+$$\hat v(s, w) \doteq w^Tx(s) \doteq \sum \limits_{i=1}^d w_i x_i$$  
+$w$ is the parameters, $x(s)$ is called a <u>*feature vector*</u> representing state $s$, and the state $s$ is the images(frames) observed by the agent in most time. So a linear approximator implemented with *tensorflow* can be just a fully-connected layer.  
 ``` python
 import tensorflow as tf
 # state: a sequence of image(frame)
@@ -25,13 +27,15 @@ inputs = tf.layers.flatten(state)
 out = layers.fully_connected(inputs, num_actions, scope=scope, reuse=reuse)
 ```
 
+<u>*2>Nonlinear-DQN*</u>  
+***Deep Q-Network.*** The main difference of *DQN* from *linear approximator* is the architecture of getting the *q_value*, it is nonlinear.
 
+![](https://media.nature.com/lw926/nature-assets/nature/journal/v518/n7540/images/nature14236-f1.jpg)
 
-<u>*2>  Nonlinear - DQN*</u>
-***Deep Q-Network.*** The main difference of *DQN* from *linear approximator*  is the architecture of getting the *q_value*, it is nonlinear.
-<img src="https://media.nature.com/lw926/nature-assets/nature/journal/v518/n7540/images/nature14236-f1.jpg" title="Nature: https://media.nature.com/lw926/nature-assets/nature/journal/v518/n7540/images/nature14236-f1.jpg" width="500" hegiht="313" align=center />
-And the total algorithm is as follows:
-<img src="https://raw.githubusercontent.com/Huixxi/CS234-Reinforcement-Learning/master/rl_images/dqn_algorithm.png" title="Paper: Human-level control through deep reinforcement learning." width="500" hegiht="313" align=center />
+And the total algorithm is as follows:  
+
+![Paper: Human-level control through deep reinforcement learning.](https://raw.githubusercontent.com/Huixxi/CS234-Reinforcement-Learning/master/rl_images/dqn_algorithm.png)
+
 The approximator of DeepMind DQN implemented with *tensorflow* as described in their [Nature paper](https://www.nature.com/articles/nature14236) can be:
 ``` python
 import tensorflow as tf
