@@ -304,7 +304,7 @@ D_{KL}(\Phi_z d_t^{(n)} || d_t)
 $$  
 Where $\Phi_z$ is the projection onto $z$, and the target distribution $d_t^{(n)}$ is:  
 $$
-d_t^{(n)} =(R_t^{(n)} + \gamma_t^{(n)} z, p_\bar{\theta} (S_{t+n}, a^*_{t+n}))
+d_t^{(n)} =(R_t^{(n)} + \gamma_t^{(n)} z, p_\bar{\theta} (S_{t+n}, a^{\*}\_{t+n}))
 $$  
 Using **double Q-learning** gets the greedy action $a^*_{t+n}$ of $S_{t+n}$ through *online network*, and evaluates such action using the *target network*.  
 
@@ -319,7 +319,7 @@ $$
 p_{\theta}^i(s, a) = \frac{exp(v_{\eta}^i + a_{\Phi}^i(\phi, a) - \bar{a}_{\Phi}^i(s))}{\sum_j exp(v_{\eta}^j + a_{\Phi}^j(\phi, a) - \bar{a}_{\Phi}^j(s))}
 $$  
 ```
-where $\phi = f_{\xi}(s)$, and $\bar{a}_{\Phi}^i(s) = \frac{1}{N_{actions}}\sum_{a'}a_{\Phi}^i(\phi, a')$  
+where $\phi = f_{\xi}(s)$, and $\bar{a}\_{\Phi}^i(s) = \frac{1}{N_{actions}}\sum_{a'}a_{\Phi}^i(\phi, a')$  
 
 Then replace all linear layers with their noisy equivalent(factorised Gaussian noise version).   
 
