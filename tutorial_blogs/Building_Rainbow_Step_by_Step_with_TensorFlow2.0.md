@@ -10,12 +10,12 @@
 This paper examines six main extensions to DQN algorithm and empirically studies their combination. (It is a good paper which gives you a summary of several important technologies to alleviate the problems remaining in DQN and provides you some valuable insights in this research region.)  
 [Baseline: Deep Q-Network(DQN) Algorithm Implementation in CS234 Assignment 2](https://github.com/Huixxi/CS234-Reinforcement-Learning/tree/master/assignment%202)
 
-<u>1.INTRODUCTION</u>   
+## INTRODUCTION   
 Because the traditional tabular methods are not applicable in arbitrarily large state spaces, we turn to those approximate solution methods (`linear approximator & nonlinear approximator` `value-function approximation & policy approximation`), which is to find a good approximate solution using limited computational resources.  We can use a `linear function`, or `multi-layer artificial neural networks`, or `decision tree` as a parameterized function to approximate the value-function or policy.(More, read Sutton's book [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book-2nd.html) Chapter 9).  
 
 The following methods are all `value-function approximation` and `gradient-based(using the gradients to update the parameters)`, and they all use **experience replay** and **target network** to eliminate the correlations present in the sequence of observations.  
 
-<u>*1>Linear*</u>  
+## 1>Linear 
 Using a linear function to approximate the value function(always the action value).  
 $$
 \hat v(s, w) \doteq w^Tx(s) \doteq \sum \limits_{i=1}^d w_i x_i
@@ -29,7 +29,7 @@ inputs = tf.layers.flatten(state)
 out = layers.fully_connected(inputs, num_actions, scope=scope, reuse=reuse)
 ```
 
-<u>*2>Nonlinear-DQN*</u>  
+## 2>Nonlinear-DQN
 ***Deep Q-Network.*** The main difference of *DQN* from *linear approximator* is the architecture of getting the *q_value*, it is nonlinear.
 
 ![](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/dqn.png)
@@ -54,7 +54,7 @@ with tf.variable_scope(scope, reuse=reuse) as _:
 
 
 
-<u>*3>Nonlinear-DDQN*</u>  
+## 3>Nonlinear-DDQN
 ***Double DQN.*** The main difference of *DDQN* from *DQN* is the way of calculating the target q value.
 As a reminder,   
 In <u>Q-Learning:</u>  
@@ -98,7 +98,7 @@ self.loss = tf.reduce_mean(tf.squared_difference(q_samp, q))
 
 
 
-<u>*4>Prioritized experience replay*</u>  
+## 4>Prioritized experience replay 
 ***Prioritized experience replay.*** Improve data efficiency, by replaying more often transitions from which there is more to learn.  
 ***And the total algorithm is as follows:***    
 
@@ -131,7 +131,7 @@ that fully compensate for the non-uniform probabilities $P(i)$  if $\beta = 1$. 
 [Do Double DQN with prioritized experience replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/tf2_priority_replay.py)
 
 
-<u>*5>Dueling network architecture*</u>   
+## 5>Dueling network architecture   
 ***Dueling network architecture.*** Generalize across actions by separately representing state values and action advantages. 
 The dueling network is a neural network architecture designed for value based RL which has a $|A|$ dimension output that Q-value for each action. It features two streams of computation, the **state value** and **action advantage** streams, sharing a convolutional encoder, and merged by a special aggregator layer.   
 
@@ -156,7 +156,7 @@ Since both the value and the advantage stream propagate gradients to the last co
 
 
 
-<u>*6>Multi-step bootstrapping*</u>  
+## 6>Multi-step bootstrapping  
 ***Multi-step bootstrap targets.*** Shift the bias-variance tradeoff and helps to propagate newly observed rewards faster to earlier visited states.  
 The best methods are often intermediate between the two extremes. *n-step TD learning method*  lies between **Monte Carlo** and **one-step TD methods**.  
 
@@ -199,7 +199,7 @@ $$
 
 
 
-<u>*7>Distributional Q-learning*</u>  
+## 7>Distributional Q-learning  
 ***Distributional Q-learning.*** Learn a categorical distribution of discounted returns, instead of its expectation.  
 In Q learning:  
 $$
@@ -253,12 +253,12 @@ as the loss function.
 
 ![](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/distributional_algorithm2.png)
 
-[Do Distributional RL Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/basic_multistep_dddqn.py)
+[Do Distributional RL Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/basic_multistep_dddqn.py)  
 I feel really sorry to say that actually, this is a failed implementation, just as a reference, but I still hope it to be helpful to someone, and I promise I will try my best to fix it. Further more, I really hope some good guy can check my code, find the wrong place, even as a contributor to make it work together, thanks a lot.
 
 
 
-<u>*8>Noisy DQN*</u>  
+## 8>Noisy DQN  
 ***Noisy DQN.***  Use stochastic network layers for exploration.  
 By now, the exploration method we used are all e-greedy methods, but in some games such as Montezuma’s Revenge, where many actions must be executed to collect the first reward. the limitations of exploring using ?-greedy policies are clear. Noisy Nets propose a noisy linear layer that combines a deterministic and noisy stream.  
 A normal linear layer with $p$ inputs and $q$ outputs, represented by:  
@@ -286,11 +286,11 @@ for the bias $\epsilon^b_j$ we could have set $f(x) = x$, but we decided to keep
 ***The total algorithm is as follows:***  
 ![Paper:Noisy Networks for Exploration](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/noisy_net_algorithm.png)
 
-[Do Noisy Network Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/basic_multistep_dddqn.py)
+[Do Noisy Network Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/basic_multistep_dddqn.py)  
 Sorry again, this model can't backpropagation maybe because some kind of flaw of TensorFlow2.0 or just my own mistake, I will try my best to make it work.
 
 
-<u>*9>Rainbow*</u>  
+## 9>Rainbow  
 Finally, we get the integrated agent: Rainbow. It used a **multi-step** distributional loss:  
 $$
 D_{KL}(\Phi_z d_t^{(n)} || d_t)
@@ -318,7 +318,7 @@ Done, and thanks for reading, I hope it could be helpful to someone.
 Any suggestion is more than welcome, thanks again.  
 
 
-<u>REFERENCES</u>   
+## REFERENCES  
 **Blogs:**  
 [1.Self Learning AI-Agents III:Deep (Double) Q-Learning(Blog)](https://towardsdatascience.com/deep-double-q-learning-7fca410b193a)  
 [2.【强化学习】Deep Q Network(DQN)算法详解(Bolg)](https://blog.csdn.net/qq_30615903/article/details/80744083)  
