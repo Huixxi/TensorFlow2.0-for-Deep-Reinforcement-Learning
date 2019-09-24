@@ -1,19 +1,21 @@
 ## TensorFlow 2.0 for Deep Reinforcement Learning
+![](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/images/gym_cartpole_v0.gif)
 <img src="https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/images/gym_cartpole_v0.gif" title="CartPole-v0 with Deep Reinforcement Learning" width="500" hegiht="313" align=center />
 Paper: 
 This is a simple tutorial of deep reinforcement learning with tensorflow 2.0, which has simple demos and detailed model implementations to help beginners get through this research region.  
 
 ### How to install TensorFlow 2.0
+https://www.tensorflow.org/install/pip
 ```
 $ conda create --name tensorflow_2_0
 $ conda activate tensorflow_2_0
-$ pip install tf-nightly-2.0-preview # tf-nightly-gpu-2.0-preview for GPU version
+$ pip install tensorflow==2.0.0-b1 # pip install tensorflow-gpu==2.0.0-b1 for GPU version
 ```
 Test:
 ```
 >>> import tensorflow as tf
->>> print(tf.__version__)
-2.0.0-dev20190129
+>>> tf.__version__
+'2.0.0-beta1'
 ```
 
 ### TensorFlow Tutorial
@@ -23,7 +25,7 @@ To be continue ...
 * Welcome to visit my [Fast Py3 Repo](https://github.com/Huixxi/Fast-Py3). This is a fast python3 tutorial.
 
 ### Gym Tutorial
-* [Basic Gym](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/utils/gym_tutorial.md)
+* [Basic Gym](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/tutorial_blogs/gym_tutorial.md)
 
 ### Reinforcement Learning
 Book notes ...
