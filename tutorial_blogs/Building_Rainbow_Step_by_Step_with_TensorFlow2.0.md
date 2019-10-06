@@ -359,6 +359,7 @@ Any suggestion is more than welcome, thanks again.
 [5.Kaixhin/Rainbow for Distribution RL & Noisy Net](https://github.com/Kaixhin/Rainbow/blob/master/model.py#L10)  
 [6.keras for Noisy Net](https://github.com/keras-team/keras/blob/master/keras/layers/core.py#L796)  
 [7.dopamine for Rainbow](https://github.com/google/dopamine/blob/master/dopamine/agents/rainbow/rainbow_agent.py)
+[8.tensorflow gudie](https://www.tensorflow.org/guide/keras/custom_layers_and_models)
 
 
 
