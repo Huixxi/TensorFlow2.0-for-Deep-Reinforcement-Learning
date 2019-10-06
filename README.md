@@ -17,10 +17,10 @@ Test:
 ```
 
 ### TensorFlow 2.0 Tutorial
-[Official Tutorial](tensorflow.org/tutorials/)
-[Hands-on ML2](https://github.com/ageron/handson-ml2)
-[Summary of some of the new features in TensorFlow 2.0](https://colab.research.google.com/github/zaidalyafeai/Notebooks/blob/master/TF_2_0.ipynb)
-[Model building with TensorFlow 2.0](https://colab.research.google.com/drive/17u-pRZJnKN0gO5XZmq8n5A2bKGrfKEUg)
+[Official Tutorial](tensorflow.org/tutorials/)  
+[Hands-on ML2](https://github.com/ageron/handson-ml2)  
+[Summary of some of the new features in TensorFlow 2.0](https://colab.research.google.com/github/zaidalyafeai/Notebooks/blob/master/TF_2_0.ipynb)  
+[Model building with TensorFlow 2.0](https://colab.research.google.com/drive/17u-pRZJnKN0gO5XZmq8n5A2bKGrfKEUg)  
 
 
 ### Python Tutorial
