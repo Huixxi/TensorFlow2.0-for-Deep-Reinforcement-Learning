@@ -358,3 +358,4 @@ if __name__ == '__main__':
     # env = gym.wrappers.Monitor(env, './recording', force=True)
     rewards_sum = agent.evaluation(env)
     print("After Training: %d out of 200" % rewards_sum)  # 200 out of 200
+    
