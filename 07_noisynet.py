@@ -17,14 +17,11 @@ import numpy as np
 import tensorflow.keras.layers as kl
 import tensorflow.keras.optimizers as ko
 
+
 from collections import deque
 
 np.random.seed(1)
 tf.random.set_seed(1)
-
-from tensorflow.python.framework import tensor_shape
-from tensorflow.python.layers import base
-from tensorflow.python.ops.init_ops import Constant
 
 # Neural Network Model Defined at Here.
 class Model(tf.keras.Model):
@@ -36,7 +33,7 @@ class Model(tf.keras.Model):
         # there is a trick that combining the two streams' fc layer, then
         # the output of that layer is a |A| + 1 dimension tensor: |V|A1|A2| ... |An|
         # output[:, 0] is state value, output[:, 1:] is action advantage
-        self.val_adv_fc = NoisyDense(num_actions + 1, input_shape=(32,))
+        self.val_adv_fc = NoisyDense(num_actions + 1, input_dim=32)
 
     # forward propagation
     def call(self, inputs):
@@ -53,57 +50,38 @@ class Model(tf.keras.Model):
         best_action = np.argmax(q_values, axis=-1)
         return best_action if best_action.shape[0] > 1 else best_action[0], q_values[0]
 
+
 # Factorized Gaussian Noise Layer
 # Reference from https://github.com/Kaixhin/Rainbow/blob/master/model.py
-class NoisyDense(kl.Dense):
-    def __init__(self, units, input_shape, std_init=0.5):
-        super().__init__(units, input_shape=input_shape, activation='relu', name='noisy_dense')
+class NoisyDense(kl.Layer):
+    def __init__(self, units, input_dim, std_init=0.5):
+        super().__init__()
+        self.units = units
         self.std_init = std_init
-        self.reset_noise(input_shape[0])
-
-
-    def build(self, input_shape):
-        assert len(input_shape) >= 2
-        input_dim = input_shape[-1]
-
+        self.reset_noise(input_dim)
         mu_range = 1 / np.sqrt(input_dim)
+        mu_initializer = tf.random_uniform_initializer(-mu_range, mu_range)
         sigma_initializer = tf.constant_initializer(self.std_init / np.sqrt(self.units))
 
-        self.weight_mu = self.add_weight(shape=(input_dim, self.units),
-                                         initializer=tf.random_uniform_initializer(-mu_range, mu_range),
-                                         name='weight_mu',
-                                         regularizer=self.kernel_regularizer,
-                                         constraint=self.kernel_constraint)
+        self.weight_mu = tf.Variable(initial_value=mu_initializer(shape=(input_dim, units), dtype='float32'),
+                                     trainable=True)
 
-        self.weight_sigma = self.add_weight(shape=(input_dim, self.units),
-                                            initializer=sigma_initializer,
-                                            name='weight_sigma',
-                                            regularizer=self.kernel_regularizer,
-                                            constraint=self.kernel_constraint)
+        self.weight_sigma = tf.Variable(initial_value=sigma_initializer(shape=(input_dim, units), dtype='float32'),
+                                        trainable=True)
 
-        self.bias_mu = self.add_weight(shape=(self.units,),
-                                       initializer=tf.random_uniform_initializer(-mu_range, mu_range),
-                                       name='bias_mu',
-                                       regularizer=self.bias_regularizer,
-                                       constraint=self.bias_constraint)
+        self.bias_mu = tf.Variable(initial_value=mu_initializer(shape=(units,), dtype='float32'),
+                                     trainable=True)
 
-        self.bias_sigma = self.add_weight(shape=(self.units,),
-                                          initializer=sigma_initializer,
-                                          name='bias_sigma',
-                                          regularizer=self.bias_regularizer,
-                                          constraint=self.bias_constraint)
-
-        self.input_spec = kl.InputSpec(min_ndim=2, axes={-1: input_dim})
-        self.built = True
-        self.kernel = self.weight_mu + self.weight_sigma * self.weights_eps
-        self.bias = self.bias_mu + self.bias_sigma * self.bias_eps
-
+        self.bias_sigma = tf.Variable(initial_value=sigma_initializer(shape=(units,), dtype='float32'),
+                                        trainable=True)
 
     def call(self, inputs):
-        output = tf.tensordot(inputs, self.kernel, 1)
-        tf.nn.bias_add(output, self.bias)
-        return output
-
+        # output = tf.tensordot(inputs, self.kernel, 1)
+        # tf.nn.bias_add(output, self.bias)
+        # return output
+        self.kernel = self.weight_mu + self.weight_sigma * self.weights_eps
+        self.bias = self.bias_mu + self.bias_sigma * self.bias_eps
+        return tf.matmul(inputs, self.kernel) + self.bias
 
     def _scale_noise(self, dim):
         noise = tf.random.normal([dim])
@@ -176,11 +154,9 @@ class SumTree:
             return self._retrieve(right, s - self.tree[left])
 
 
-
-
 class NoisyAgent:  # Multi-Step TD Learning Based on Dueling Double DQN with Proportional Prioritization
-    def __init__(self, model, target_model, env, learning_rate=.0008, epsilon=.1, epsilon_dacay=0.995, min_epsilon=.01,
-                 gamma=.9, batch_size=8, target_update_iter=400, train_nums=5000, buffer_size=300, replay_period=20,
+    def __init__(self, model, target_model, env, learning_rate=.005, epsilon=.1, epsilon_dacay=0.995, min_epsilon=.01,
+                 gamma=.9, batch_size=8, target_update_iter=400, train_nums=4000, buffer_size=300, replay_period=20,
                  alpha=0.4, beta=0.4, beta_increment_per_sample=0.001, n_step=3):
         self.model = model
         self.target_model = target_model
