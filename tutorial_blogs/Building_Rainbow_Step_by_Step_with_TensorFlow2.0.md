@@ -294,7 +294,7 @@ for the bias $\epsilon^b_j$ we could have set $f(x) = x$, but we decided to keep
 ![Paper:Noisy Networks for Exploration](https://raw.githubusercontent.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/master/images/noisy_net_algorithm.png)
 
 [Do Noisy Network Based on Multi-Step Dueling Double DQN with Prioritized Experience Replay from scratch(basic version)](https://github.com/Huixxi/TensorFlow2.0-for-Deep-Reinforcement-Learning/blob/master/07_noisynet.py)  
-Sorry again, this model can't backpropagation maybe because some kind of flaw of TensorFlow2.0 or just my own mistake, I will try my best to make it work.
+Run well, but too slow.(I don't know why...)
 
 
 ## 9>Rainbow  
