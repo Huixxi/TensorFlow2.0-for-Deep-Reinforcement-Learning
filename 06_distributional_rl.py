@@ -197,7 +197,7 @@ class DISTAgent:  # Distributional RL Based on Multi-Step Dueling Double DQN wit
             self.n_step_buffer.append(temp_transition)
             if len(self.n_step_buffer) == self.n_step:  # fill the n-step buffer for the first translation
                 # add a multi step transition
-                reward, next_state, done = self.get_n_step_info(self.n_step_buffer, self.gamma)
+                reward, next_obs, done = self.get_n_step_info(self.n_step_buffer, self.gamma)
                 obs, action = self.n_step_buffer[0][:2]
 
             if t == 1:
