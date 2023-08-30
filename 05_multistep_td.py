@@ -172,14 +172,15 @@ class MSTDAgent:  # Multi-Step TD Learning Based on Dueling Double DQN with Prop
             self.n_step_buffer.append(temp_transition)
             if len(self.n_step_buffer) == self.n_step:  # fill the n-step buffer for the first translation
                 # add a multi step transition
-                reward, next_obs, done = self.get_n_step_info(self.n_step_buffer, self.gamma)
+                reward, next_obs_to_store, done = self.get_n_step_info(self.n_step_buffer, self.gamma)
                 obs, action = self.n_step_buffer[0][:2]
-
+            else:
+                next_obs_to_store = next_obs
             if t == 1:
                 p = self.p1
             else:
                 p = np.max(self.replay_buffer.tree[-self.replay_buffer.capacity:])
-            self.store_transition(p, obs, action, reward, next_obs, done)  # store that transition into replay butter
+            self.store_transition(p, obs, action, reward, next_obs_to_store, done)  # store that transition into replay butter
             self.num_in_buffer = min(self.num_in_buffer + 1, self.buffer_size)
 
             if t > self.buffer_size:
