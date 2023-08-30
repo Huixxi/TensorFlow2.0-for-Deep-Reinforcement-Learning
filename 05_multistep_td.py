@@ -204,7 +204,7 @@ class MSTDAgent:  # Multi-Step TD Learning Based on Dueling Double DQN with Prop
         target_q = self.get_target_value(self.b_next_states)    # get target q-value through the target network
         # get td_targets of batch states
         td_target = self.b_rewards + \
-            self.gamma * target_q[np.arange(target_q.shape[0]), best_action_idxes] * (1 - self.b_dones)
+            self.gamma**(self.n_step ) * target_q[np.arange(target_q.shape[0]), best_action_idxes] * (1 - self.b_dones)
         predict_q = self.model.predict(self.b_obs)
         td_predict = predict_q[np.arange(predict_q.shape[0]), self.b_actions]
         abs_td_error = np.abs(td_target - td_predict) + self.margin
